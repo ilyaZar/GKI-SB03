@@ -73,7 +73,7 @@ model.add(K.layers.Dense(units=8, activation='relu'))
 
 # Ausgabeschicht für binäre Klassifikation
 # - 1 Neuron (0 = rot, 1 = weiß)
-# - Aktivierungsfunktion: Sigmoid (liefert Werte zwischen 0 und 1 → geeignet für binäre Klassen)
+# - Aktivierungsfunktion: Sigmoid (liefert Werte zwischen 0 und 1 geeignet für binäre Klassen)
 model.add(K.layers.Dense(units=1, activation='sigmoid'))
 
 # Kompilieren des Modells: Festlegen von Optimierer, Verlustfunktion und Metriken
@@ -89,7 +89,7 @@ model.compile(
 # Das neuronale Netz ist vollständig aufgebaut:
 # - Eingabeschicht mit 12 Neuronen (input_dim = 11 Merkmale)
 # - 1 versteckte Schicht (Hidden Layer) mit 8 Neuronen
-# - Ausgabeschicht mit 1 Neuron (Sigmoid → Wahrscheinlichkeit für Klasse 1)
+# - Ausgabeschicht mit 1 Neuron (Sigmoid -> Wahrscheinlichkeit für Klasse 1)
 # Für binäre Klassifikation genügt ein einzelnes Ausgabeneuron mit
 # Sigmoid-Aktivierung, das eine Wahrscheinlichkeit im Intervall [0,1] liefert.
 

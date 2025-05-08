@@ -13,8 +13,8 @@ mnist = K.datasets.mnist
 x_train = x_train / 255.0
 x_test = x_test / 255.0
 
-# One-Hot-Encoding der Zielvariable (10 Klassen → Vektor mit 10 Einträgen)
-# Beispiel: Klasse 3 → [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+# One-Hot-Encoding der Zielvariable (10 Klassen -> Vektor mit 10 Einträgen)
+# Beispiel: Klasse 3 -> [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
 y_train = K.utils.to_categorical(y_train)
 y_test = K.utils.to_categorical(y_test)
 
@@ -89,38 +89,53 @@ x_test_mf = x_test_mf / 255.0
 # Beispiel: Klasse 3 → [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
 y_train_mf = K.utils.to_categorical(y_train_mf)
 y_test_mf = K.utils.to_categorical(y_test_mf)
-model = Sequential()
-model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)))
+
+model2 = Sequential()
+model2.add(Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)))
 
 # 2. Anschließend reduziert ein MaxPooling2D-Layer die räumliche Dimension der Featuremaps
-model.add(MaxPooling2D((2, 2)))
+model2.add(MaxPooling2D((2, 2)))
 
 # 3. Der Flatten-Layer wandelt die 2D-Ausgabe in einen 1D-Vektor um,
 #    sodass dieser an vollverbundene (Dense) Schichten übergeben werden kann
-model.add(Flatten())
+model2.add(Flatten())
 
 # 4. Eine Dense-Schicht mit 100 Neuronen und ReLU-Aktivierung als Hidden-Layer
-model.add(Dense(100, activation='relu'))
+model2.add(Dense(100, activation='relu'))
 
 # 5. Ausgabeschicht für 10 Klassen (z. B. Ziffern oder Kleidungsstücke), Softmax-Aktivierung liefert Wahrscheinlichkeiten
-model.add(Dense(10, activation='softmax'))
+model2.add(Dense(10, activation='softmax'))
 
 # Kompilierung des CNN:
 # - Optimierer: Adam (effizient, adaptiv)
 # - Verlustfunktion: categorical_crossentropy (geeignet für mehrklassige Klassifikation mit One-Hot-Labels)
 # - Metrik: accuracy
-model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
+model2.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
 # Training des CNN:
 # - x_train_mf und y_train_mf: normalisierte Trainingsbilder und One-Hot-Labels
 # - x_test_mf und y_test_mf: Testdaten zur Validierung
 # - 30 Epochen, Batch-Größe 128
-history = model.fit(
-    x_train_mf, y_train_mf,
+history = model2.fit(
+    # x_train_mf, y_train_mf,
+    x_train, y_train,
     epochs=30,
     batch_size=128,
-    validation_data=(x_test_mf, y_test_mf)
+    validation_data=(x_test, y_test)
 )
+
+fig, ax = plt.subplots(nrows=1, ncols=1)
+ax.set_title('Accuracy over epochs', fontsize='medium')
+ax.set_xlabel('epochs')
+ax.set_ylabel('accuracy')
+
+# Moderne Keras-Namenskonventionen: 'accuracy' statt 'acc'
+ax.plot(history.history['accuracy'], label='train')
+ax.plot(history.history['val_accuracy'], label='validation')
+ax.legend(loc='upper left')
+
+plt.show()  # ggf. hier speichern mit
+plt.savefig("mnist_accuracy_convolutional.png")
 
 # Das CNN beginnt mit einem Conv2D-Layer:
 # - Er verwendet 32 Filter mit einer Kernelgröße von 3x3
