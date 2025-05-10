@@ -86,13 +86,6 @@ model.compile(
     metrics=['accuracy']
 )
 
-# Das neuronale Netz ist vollständig aufgebaut:
-# - Eingabeschicht mit 12 Neuronen (input_dim = 11 Merkmale)
-# - 1 versteckte Schicht (Hidden Layer) mit 8 Neuronen
-# - Ausgabeschicht mit 1 Neuron (Sigmoid -> Wahrscheinlichkeit für Klasse 1)
-# Für binäre Klassifikation genügt ein einzelnes Ausgabeneuron mit
-# Sigmoid-Aktivierung, das eine Wahrscheinlichkeit im Intervall [0,1] liefert.
-
 # Für mehrklassige Klassifikation würde man stattdessen:
 # - mehrere Ausgabeneuronen (entsprechend der Klassenzahl)
 # - und eine 'softmax'-Aktivierung verwenden
