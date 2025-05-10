@@ -61,7 +61,6 @@ ax.set_title('Accuracy over epochs', fontsize='medium')
 ax.set_xlabel('epochs')
 ax.set_ylabel('accuracy')
 
-# Moderne Keras-Namenskonventionen: 'accuracy' statt 'acc'
 ax.plot(history.history['accuracy'], label='train')
 ax.plot(history.history['val_accuracy'], label='validation')
 ax.legend(loc='upper left')
@@ -129,7 +128,6 @@ ax.set_title('Accuracy over epochs', fontsize='medium')
 ax.set_xlabel('epochs')
 ax.set_ylabel('accuracy')
 
-# Moderne Keras-Namenskonventionen: 'accuracy' statt 'acc'
 ax.plot(history.history['accuracy'], label='train')
 ax.plot(history.history['val_accuracy'], label='validation')
 ax.legend(loc='upper left')
