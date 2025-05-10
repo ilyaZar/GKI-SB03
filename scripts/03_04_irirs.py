@@ -33,7 +33,8 @@ y = df["species"]
 
 
 # Aufteilen der Daten in Trainings- und Testdaten
-# Wichtig: Testdaten dürfen nicht im Training verwendet werden, um Overfitting zu erkennen
+# Wichtig: Testdaten dürfen nicht im Training verwendet werden, um mögliches
+# Overfitting zu erkennen
 from sklearn.model_selection import train_test_split
 
 # Die Funktion train_test_split mischt die Daten zufällig und teilt sie auf:
@@ -79,7 +80,7 @@ model.fit(X_tr, y_tr)
 
 # Alternative Kriterien:
 # - criterion='entropy': verwendet Informationsgewinn, ähnlich ID3
-#   → geeignet für kategoriale Merkmale, erzeugt aber oft tiefere Bäume
+#   geeignet für kategoriale Merkmale, erzeugt aber oft tiefere Bäume
 
 # Wichtige Parameter zur Steuerung der Baumkomplexität:
 # - max_depth: maximale Tiefe des Baumes
@@ -103,20 +104,18 @@ from sklearn.metrics import confusion_matrix, classification_report
 # --- 2. Vorhersage der Testdaten ---
 # Das Modell ist bisher nur auf den Trainingsdaten X_tr, y_tr trainiert worden.
 # Nun wenden wir es auf neue, ungesehene Daten an, um seine Generalisierbarkeit zu prüfen.
+# Wichtig:
+# - Nur auf Daten anwenden, die NICHT zum Training verwendet wurden
+# - Sonst ist das Ergebnis nicht aussagekräftig zur Modellgüte auf neuen Daten
 
 # predict() nimmt als Input die Merkmalsmatrix X_tst (Form: [n_samples, n_features])
 # und gibt ein 1D-Array mit den vorhergesagten Klassenlabels zurück.
 y_predicted = model.predict(X_tst)
 
-# Wichtig:
-# - Nur auf Daten anwenden, die NICHT zum Training verwendet wurden
-# - Sonst ist das Ergebnis nicht aussagekräftig zur Modellgüte auf neuen Daten
-
 
 # --- 3. Konfusionsmatrix ---
 # Die confusion_matrix vergleicht wahre Klassenlabels (y_tst)
 # mit den vom Modell vorhergesagten Labels (y_predicted).
-
 # Die Matrix ist quadratisch: (n_classes × n_classes)
 # Zeilen: wahre Klassen
 # Spalten: vorhergesagte Klassen
