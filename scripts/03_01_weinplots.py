@@ -14,7 +14,7 @@ ax[0].hist(red.alcohol, 10, facecolor='red', alpha=0.5, label="Rotwein")
 # Erzeugen eines Histogramms für den Weißwein-Datensatz
 ax[1].hist(white.alcohol, 10, facecolor='green', alpha=0.5, label="Weißwein")
 # ax[1].hist(white.alcohol, 10, facecolor='white', ec="black", lw=0.5, alpha=0.5, label="Weißwein")
-# # Positionierung der Subplots
+# Positionierung der Subplots
 fig.subplots_adjust(left=0.15, right=0.9, bottom=0.25, top=0.75, hspace=0.05, wspace=0.5)
 # Setzen der oberen Grenze für die Häufigkeiten
 ax[0].set_ylim([0, 1000])
